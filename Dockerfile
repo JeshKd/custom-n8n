@@ -2,19 +2,24 @@ FROM n8nio/n8n:latest
 
 USER root
 
-# Installer les bibliothèques nécessaires à Puppeteer (pour WhatsApp Web)
+# Dépendances système minimales pour Chromium utilisé par Puppeteer
 RUN apk add --no-cache \
-    nss \
-    atk \
-    at-spi2-core \
-    xss \
-    gtk+3.0 \
-    alsa-lib \
     chromium \
+    nss \
+    freetype \
     harfbuzz \
     ttf-freefont \
+    dumb-init \
+    udev \
+    bash \
+    curl \
+    ca-certificates \
     nodejs \
     npm
+
+# Ajouter le chemin vers Chromium pour Puppeteer
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 
 # Installer le plugin WhatsApp Web
 RUN npm install --omit=dev n8n-nodes-whatsapp-web
