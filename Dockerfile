@@ -10,3 +10,5 @@ RUN git clone --depth=1 https://github.com/tavo2311/n8n-nodes-whatsapp-web.git /
 
 # Revenir à l'utilisateur node (comme recommandé par n8n)
 USER node
+
+# Force redeploy
